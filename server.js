@@ -4,11 +4,21 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const lyricsFinder = require("lyrics-finder");
 const SpotifyWebApi = require("spotify-web-api-node");
+const path = require("path");
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// app.get('/', (req, res) => {
+//   res.json({
+//     message: 'Selamat Datang Di Spotify Clone',
+//   });
+// });
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "src", "index.html"));
+});
 
 app.post("/refresh", (req, res) => {
   const refreshToken = req.body.refreshToken;
